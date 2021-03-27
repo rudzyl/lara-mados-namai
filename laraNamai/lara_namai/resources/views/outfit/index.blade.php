@@ -12,7 +12,7 @@
                     <a href="{{route('outfit.edit',[$outfit])}}">{{$outfit->type}} {{$outfit->outfitMaster->name}} {{$outfit->outfitMaster->surname}}</a>
                     <form method="POST" action="{{route('outfit.destroy', [$outfit])}}">
                         @csrf
-                        <button type="submit">DELETE</button>
+                        <button class="btn btn-outline-danger" type="submit">DELETE</button>
                     </form>
                     <br>
                     @endforeach

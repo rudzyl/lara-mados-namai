@@ -9,10 +9,18 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{route('master.update',[$master->id])}}">
-                        Name: <input type="text" name="master_name" value="{{$master->name}}">
-                        Surname: <input type="text" name="master_surname" value="{{$master->surname}}">
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" name="master_name" value="{{$master->name}}">
+                            <small class="form-text text-muted">Edit name</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Surname:</label>
+                            <input type="text" name="master_surname" value="{{$master->surname}}">
+                            <small class="form-text text-muted">Edit surname</small>
+                        </div>
                         @csrf
-                        <button type="submit">EDIT</button>
+                        <button class="btn btn-outline-success" type="submit">EDIT</button>
                     </form>
                 </div>
             </div>

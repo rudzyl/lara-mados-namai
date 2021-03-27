@@ -9,10 +9,18 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{route('master.store')}}">
-                        Name: <input type="text" name="master_name">
-                        Surname: <input type="text" name="master_surname">
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" name="master_name">
+                            <small class="form-text text-muted">Enter name</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Surname:</label>
+                            <input type="text" name="master_surname">
+                            <small class="form-text text-muted">Enter surname</small>
+                        </div>
                         @csrf
-                        <button type="submit">ADD</button>
+                        <button class="btn btn-outline-success" type="submit">ADD</button>
                     </form>
                 </div>
             </div>

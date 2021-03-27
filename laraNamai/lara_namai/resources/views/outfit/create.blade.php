@@ -42,7 +42,7 @@
                             <small class="form-text text-muted">Select designer's name.</small>
                         </div>
                         @csrf
-                        <button type="submit">ADD</button>
+                        <button class="btn btn-outline-success" type="submit">ADD</button>
                     </form>
                 </div>
             </div>

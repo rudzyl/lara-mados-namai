@@ -36,10 +36,7 @@ class MasterController extends Controller
      */
     public function store(Request $request)
     {
-        $master = new Master;
-        $master->name = $request->master_name;
-        $master->surname = $request->master_surname;
-        $master->save();
+        Master::create($request);
         return redirect()->route('master.index')->with('success_message', 'Created successfully.');
     }
 
