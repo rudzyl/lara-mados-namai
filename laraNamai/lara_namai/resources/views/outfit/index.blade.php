@@ -12,8 +12,9 @@
                             <div class="form-group make-inline">
                                 <label>Designer: </label>
                                 <select class="form-control" name="master_id">
+                                    <option value="0" disabled @if($filterBy==0) selected @endif>Select master</option>
                                     @foreach ($masters as $master)
-                                    <option value="{{$master->id}}">
+                                    <option value="{{$master->id}}" @if($filterBy==$master->id) selected @endif>
                                         {{$master->name}} {{$master->surname}}
                                     </option>
                                     @endforeach
@@ -21,7 +22,7 @@
                             </div>
                             <button class="btn btn-outline-info" type="submit">Filter</button>
                         </form>
-                        <a href="{{route('outfit.index')}}" class="btn btn-info"> Default</a>
+                        <a href="{{route('outfit.index')}}" class="btn btn-info"> Clear filter</a>
                     </div>
                 </div>
 
