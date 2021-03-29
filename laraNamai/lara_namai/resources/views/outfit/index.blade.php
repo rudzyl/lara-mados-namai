@@ -5,17 +5,41 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Wardrobe</div>
+                <div class="card-header">
+                    <h2>Wardrobe</h2>
+                    <div class="make-inline">
+                        <form action="{{route('outfit.index')}}" method="get" class="make-inline">
+                            <div class="form-group make-inline">
+                                <label>Designer: </label>
+                                <select class="form-control" name="master_id">
+                                    @foreach ($masters as $master)
+                                    <option value="{{$master->id}}">
+                                        {{$master->name}} {{$master->surname}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button class="btn btn-outline-info" type="submit">Filter</button>
+                        </form>
+                        <a href="{{route('outfit.index')}}" class="btn btn-info"> Default</a>
+                    </div>
+                </div>
 
                 <div class="card-body">
-                    @foreach ($outfits as $outfit)
-                    <a href="{{route('outfit.edit',[$outfit])}}">{{$outfit->type}} {{$outfit->outfitMaster->name}} {{$outfit->outfitMaster->surname}}</a>
-                    <form method="POST" action="{{route('outfit.destroy', [$outfit])}}">
-                        @csrf
-                        <button class="btn btn-outline-danger" type="submit">DELETE</button>
-                    </form>
-                    <br>
-                    @endforeach
+                    <ul class="list-group">
+                        @foreach ($outfits as $outfit)
+                        <li class="list-group-item">
+                            <div>
+                                {{$outfit->type}} {{$outfit->outfitMaster->name}} {{$outfit->outfitMaster->surname}}
+                            </div>
+                            <a class="btn btn-outline-primary" href="{{route('outfit.edit',[$outfit])}}">EDIT</a>
+                            <form method="POST" action="{{route('outfit.destroy', [$outfit])}}">
+                                @csrf
+                                <button class="btn btn-outline-danger" type="submit">DELETE</button>
+                            </form>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

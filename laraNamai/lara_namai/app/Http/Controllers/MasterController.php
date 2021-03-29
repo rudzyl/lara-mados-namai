@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Master;
 use Illuminate\Http\Request;
-
+use Validator;
 class MasterController extends Controller
 {
     /**
@@ -12,9 +12,19 @@ class MasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $masters = Master::all();
+        if ('name' == $request->sort) {
+            $masters = Master::orderBy('name')->get();
+        }
+        else if ('surname' == $request->sort) {
+            $masters = Master::orderBy('surname')->get();
+        } 
+        else {
+            $masters = Master::all();
+        }
+        // $masters = Master::all();
+        // $masters = Master::orderBy('surname')->get();
        return view('master.index', ['masters' => $masters]);
     }
 
@@ -36,6 +46,21 @@ class MasterController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(), //argumentas nr 1
+        [
+            'master_name' => ['required', 'min:3', 'max:64'], //argumentas nr 2
+            'master_surname' => ['required', 'min:3', 'max:64'],
+        ],
+        //  [
+        //  'master_surname.required' => 'ideti pavarde', //argumentas nr 3
+        //  'master_surname.min' => 'per trumpa pavarde'
+        //  ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
         Master::create($request);
         return redirect()->route('master.index')->with('success_message', 'Created successfully.');
     }
@@ -70,7 +95,22 @@ class MasterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Master $master)
-    {
+    { 
+        $validator = Validator::make(
+            $request->all(), //argumentas nr 1
+        [
+            'master_name' => ['required', 'min:3', 'max:64'], //argumentas nr 2
+            'master_surname' => ['required', 'min:3', 'max:64'],
+        ],
+        //  [
+        //  'master_surname.required' => 'ideti pavarde', //argumentas nr 3
+        //  'master_surname.min' => 'per trumpa pavarde'
+        //  ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
        $master->name = $request->master_name;
        $master->surname = $request->master_surname;
        $master->save();

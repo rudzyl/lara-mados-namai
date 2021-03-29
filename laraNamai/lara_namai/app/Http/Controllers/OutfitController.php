@@ -13,10 +13,22 @@ class OutfitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       $outfits = Outfit::all();
-       return view('outfit.index', ['outfits' => $outfits]);
+        // filtravimas
+        $masters = Master::all();
+        if($request->master_id) {
+            $outfits = Outfit::where('master_id', $request->master_id)->get();
+            $filterBy = $request->master_id;
+        }
+        else {
+            $outfits = Outfit::all();
+        }
+        return view('outfit.index', [
+            'outfits' => $outfits, 
+            'masters' => $masters,
+            'filterBy'=>$filterBy ?? 0
+            ]);  
     }
 
     /**

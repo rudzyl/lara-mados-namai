@@ -10942,4 +10942,18 @@ a.text-dark:focus {
   }
 }
 
+.make-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.make-inline select {
+  margin: 0 12px;
+}
+
+.make-inline.form-group {
+  margin-bottom: 0;
+}
+
 

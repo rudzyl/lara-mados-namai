@@ -11,12 +11,12 @@
                     <form method="POST" action="{{route('master.update',[$master->id])}}">
                         <div class="form-group">
                             <label>Name:</label>
-                            <input type="text" name="master_name" value="{{$master->name}}">
+                            <input type="text" name="master_name" value="{{old('master_name', $master->name)}}">
                             <small class="form-text text-muted">Edit name</small>
                         </div>
                         <div class="form-group">
                             <label>Surname:</label>
-                            <input type="text" name="master_surname" value="{{$master->surname}}">
+                            <input type="text" name="master_surname" value="{{old('master_surname', $master->surname)}}">
                             <small class="form-text text-muted">Edit surname</small>
                         </div>
                         @csrf
